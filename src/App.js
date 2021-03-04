@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import axios from "axios"
+import Form from './components/Form';
+import Container from './components/Container';
 
 function App() {
+  const [types, setTypes] = useState("https://pokeapi.co/api/v2/type")
+  const [search, setSearch] = useState();
+  
+  useEffect(() => {
+    const res = axios(types)
+    res.then((response) => setTypes(response.data.results))
+  }, [types])
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      { typeof(types) === "object" && <Form types={types} setSearch={setSearch}/> }
+
+      {search && <Container search={search} />}
+
     </div>
   );
 }
