@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 
 const CardPoke = ({ info }) => {
 
@@ -9,7 +10,10 @@ const CardPoke = ({ info }) => {
 
     return (
       <div>
-        <h4>{name}</h4><span><strong># {id}</strong></span>
+        <h4>{name}</h4>
+        <Link to={`pokemon/${id}`}>
+          <span><strong># {id}</strong></span>
+        </Link>
         <div>
           <img src={img} alt={name}/>
         </div>
